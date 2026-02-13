@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador de Gatos 🐱</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #ff9800;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #e68900;
+        }
+
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        .erro {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Gerador de Gatinhos 🐾</h1>
+
+        <!-- Mensagens de erro -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="erro">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/cat" method="POST">
+            <input type="text" name="nome" placeholder="Digite o nome do gato">
+            <br>
+            <button type="submit">Gerar Gato 🐱</button>
+        </form>
+
+        {% if nome and url %}
+        <h2>Olá, {{ nome }}! 🐾</h2>
+        <img src="{{ url }}" alt="Imagem de gato">
+
+        <br><br>
+
+        <a href="/download?url={{ url }}">
+            <button>Baixar imagem 📥</button>
+        </a>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
